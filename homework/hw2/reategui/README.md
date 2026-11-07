@@ -32,11 +32,13 @@ Part C used Semgrep 1.182.1 in `.venv` and an already installed local Ollama
 
 ```bash
 python3 -m venv .venv
-source .venv/bin/activate  # Or .venv\Scripts\activate on Windows
+source .venv/bin/activate
 pip install semgrep
 ollama list
 python3 duel/run.py
 ```
+On Windows use: .venv\Scripts\activate
+
 *(**Note**: You can also use python3 duel/run.py --rescore to bypass the local LLM execution and instantly recalculate metrics using our cached JSON/TXT outputs).*
 
 The run script forces two uncached inferences with fixed, different seeds and keeps the exact prompt, raw model output, raw Semgrep JSON, finding CSV and metric CSV. `.venv` and model cache files are excluded from Git by `.gitignore`.
