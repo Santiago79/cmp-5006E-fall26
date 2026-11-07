@@ -21,6 +21,8 @@ The model text and metadata show both were uncached calls. We used the course's 
 
 Confidence and wording also varied between runs. Run 1 assigned `high` confidence to all three findings. Run 2 dropped the XSS confidence to `Medium` and justified the command injection by stating, *"simulating a command injection vulnerability"*. This highlights a known challenge in LLM security pipelines: a model may correctly identify a defect but fail an automated evaluation if its unstructured output deviates syntactically from the expected taxonomy.
 
+**Regarding hallucinations:** The LLM did not generate any true hallucinations (such as inventing a fake CVE or identifying a vulnerability in safe code) across our two runs. Its only failure, and technically its "best hallucination" according to the automated scorer was inventing the unknown `command injection (simulated)` label.
+
 Neither tool truthfully found Broken Access Control. Semgrep did not report it, and the LLM did not report it in either run. The SQLi leaks the admin row, but the app has no session or role checks against which to establish a separate access-control defect.
 
 Evidence: [raw Semgrep JSON](semgrep.json), [prompt](prompt.txt), [LLM run 1](llm_run_1.txt), [LLM run 2](llm_run_2.txt), [all findings](findings.csv), and [metrics](metrics.csv). Run metadata and Semgrep stderr are retained for reproducibility. 
